@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block sidebar_back %}{% url 'Management:home' %}{% endblock %}
+{% block navbar_management %}active{% endblock %}
+{% block sidebar_content %}
+    <li class="{% block sidebar_strategy %}{% endblock %}"><a href="{% url 'Management:strategy' %}">Strategy</a></li>
+    <li class="{% block sidebar_create_strategy %}{% endblock %}"><a href="{% url 'Management:create_strategy' %}">Create
+        Strategy</a></li>
+    <li class="{% block sidebar_plan %}{% endblock %}"><a href="{% url 'Management:plan' %}">Plan</a></li>
+    <li class="{% block sidebar_create_plan %}{% endblock %}"><a href="{% url 'Management:create_plan' %}">Create
+        Plan</a>
+    </li>
+{% endblock %}

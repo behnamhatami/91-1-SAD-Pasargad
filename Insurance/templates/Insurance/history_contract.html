@@ -1,0 +1,35 @@
+{% extends "Insurance/insurance_base.html" %}
+{% block navbar_title %} History Company {% endblock %}
+{% block sidebar_contract %}active{% endblock %}
+{% block sidebar_back %}{% url 'Insurance:view_contract' contract_info.contract.id %}{% endblock %}
+
+
+{% block content %}
+    {% if not notify_message %}
+        <hr>
+        <table style="background: #ededff" class="table table-bordered">
+            <colgroup>
+                <col class="col1">
+                <col class="col2">
+            </colgroup>
+            <thead>
+            <tr>
+                {% for field in form_head.visible_fields %}
+                    <th><b>{{ field.label|capfirst }}</b></th>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+            {% for property_list in property_set %}
+                <tr>
+                    {% for property in property_list %}
+                        <td>
+                            <lable>{{ property.1|linebreaksbr }}</lable>
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "Accident/accident_base.html" %}
+{% block navbar_title %} Edit Company {% endblock %}
+{% block sidebar_accident %}active{% endblock %}
+{% block sidebar_back %}{% url 'Accident:home' %}{% endblock %}
+
+
+{% block content %}
+    {% if form %}
+        <div class="container">
+            <form class="form-horizontal" style="width: 400px;" method="POST">
+                {% csrf_token %}
+                <hr>
+                <table style="background: #ededff" class="table table-bordered">
+                    <colgroup>
+                        <col class="col1">
+                        <col class="col2">
+                    </colgroup>
+                    <tbody>
+                    {{ form.as_table }}
+                    </tbody>
+                </table>
+                <button class="btn btn-success" type="submit">Show</button>
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}

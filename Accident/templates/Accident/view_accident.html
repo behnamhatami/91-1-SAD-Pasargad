@@ -1,0 +1,43 @@
+{% extends "Accident/accident_base.html" %}
+{% block navbar_title %} View Accident {% endblock %}
+{% block sidebar_accident %}active{% endblock %}
+{% block sidebar_back %}{% url 'Accident:accident' %}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <form class="form-horizontal" style="width: 400px;" method="POST">
+            {% csrf_token %}
+            {% for property_list in property_set %}
+                <h3>{{ property_list.title }}</h3>
+                <table style="background: #ededff" class="table table-bordered">
+                    <colgroup>
+                        <col class="col1">
+                        <col class="col2">
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                        <td><label>ID Number</label></td>
+                        <td><label>{{ property_list.id }}</label></td>
+                    </tr>
+                    {% for property in property_list %}
+                        <tr>
+                            <td><label>{{ property.0 }}</label></td>
+                            <td><label>{{ property.1|linebreaksbr }}</label></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <hr>
+            {% endfor %}
+            {% if property_set|length == 1 %}
+                {% if security.Expert %}
+                    <a class="btn btn-info" type="submit" href="{% url 'Accident:finalize_accident' accident_id %}">Finalize</a>
+                {% endif %}
+            {% else %}
+                <label>
+                    <small>This Accident Closed.</small>
+                </label>
+            {% endif %}
+        </form>
+    </div>
+{% endblock %}

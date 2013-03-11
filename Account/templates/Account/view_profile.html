@@ -1,0 +1,31 @@
+{% extends "Account/account_base.html" %}
+{% block navbar_title %} User Information {% endblock %}
+{% block sidebar_view_profile %}active{% endblock %}
+{% block content %}
+    <hr>
+    <table style="background: #ededff" class="table table-bordered">
+        <colgroup>
+            <col class="col1">
+            <col class="col2">
+        </colgroup>
+        <tbody>
+        <tr>
+            <td><label>ID Number</label></td>
+            <td><label>{{ property_list.id }}</label></td>
+        </tr>
+
+        {% for property in property_list %}
+            <tr>
+                <td><label>{{ property.0 }}</label></td>
+                {% if property.1 == True %}
+                    <td><img src="/static/img/icon-yes.gif" alt="True"/></td>
+                {% elif property.1 == False %}
+                    <td><img src="/static/img/icon-no.gif" alt="False"/></td>
+                {% else %}
+                    <td>{{ property.1|linebreaksbr }}</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

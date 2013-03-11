@@ -1,0 +1,29 @@
+{% extends "home_base.html" %}
+
+{% block navbar_title %} Statistic {% endblock %}
+{% block sidebar_statistic %}active{% endblock %}
+{% block navbar_statistic %}active{% endblock %}
+{% block sidebar_back %}{% url 'Home:home' %}{% endblock %}
+{% block content %}
+<div class="row-fluid">
+    <div class="span4">
+        <h2>General Statistic</h2>
+
+        <p>You can access all the statistics about the income and expenditure of the whole company and see the charts of them.
+        <p><a class="btn" href="{% url 'Statistic:general' %}">View financial reports &raquo;</a></p>
+    </div>
+    <!--/span-->
+    <div class="span4">
+        <h2>User Statistic</h2>
+        <p>You can review the statistic of your employee to see how much activity the dealer has in the company.</p>
+        <p><a class="btn" href="{% url 'Statistic:user' %}">Statistic of an employee &raquo;</a></p>
+    </div>
+    <!--/span-->
+    <div class="span4">
+        <h2>Owner Statistic</h2>
+        <p>You can access the financial issues of one specific Customer. Using this section you will access all the money
+            gave and delivered by the company to an Customer.</p>
+        <p><a class="btn" href="{% url 'Statistic:owner' %}"> Statistic of a customer &raquo;</a></p>
+    </div>
+</div><!--/row-->
+{% endblock %}

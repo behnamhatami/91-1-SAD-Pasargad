@@ -1,0 +1,25 @@
+{% extends "home_base.html" %}
+
+{% block navbar_title %} Insurance {% endblock %}
+{% block navbar_insurance %}active{% endblock %}
+{% block sidebar_insurance %}active{% endblock %}
+{% block sidebar_back %}{% url 'Home:home' %}{% endblock %}
+{% block content %}
+    <div class="row-fluid">
+        <div class="span4">
+            <h2>View Contract</h2>
+            <p>Simply view an existing contract by entering the contract-id on the insurance card.</p>
+            <p><a class="btn" href="{% url 'Insurance:contract' %}">View contract &raquo;</a></p>
+        </div>
+        <!--/span-->
+        {% if security.Secretory %}
+            <div class="span4">
+                <h2>Create Contract</h2>
+                <p>Create a new contract or an extention using the system. Enter the details of the owner and the vehicle and the system will
+                calculate the amount of money that should be payed, only in four steps.</p>
+                <p><a class="btn" href="{% url 'Insurance:create_contract' %}">Create contract &raquo;</a></p>
+            </div>
+        {% endif %}
+        <!--/span-->
+    </div><!--/row-->
+{% endblock %}

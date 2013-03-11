@@ -1,0 +1,20 @@
+{% extends "Management/management_base.html" %}
+{% block navbar_title %} Delete strategy {% endblock %}
+{% block sidebar_strategy %}active{% endblock %}
+{% block sidebar_back %}{% url 'Management:view_strategy' strategy.id %}{% endblock %}
+
+{% block content %}
+    {% if strategy %}
+        <div class="container">
+            <form class="form-horizontal" style="width: 400px;" method="POST">
+                {% csrf_token %}
+                <hr>
+                <p>
+                    Are you sure you want to delete the insurance plan named {{ strategy.name }}?
+                </p>
+                <button class="btn btn-danger" type="submit">Confirm</button>
+                <a class="btn btn-warning" href="{% url 'Management:view_strategy' strategy.id %}">Cancel</a>
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}

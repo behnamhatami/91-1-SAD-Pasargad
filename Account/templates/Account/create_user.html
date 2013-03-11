@@ -1,0 +1,24 @@
+{% extends "Account/account_base.html" %}
+{% block navbar_title %} Create User {% endblock %}
+{% block sidebar_create_user %}active{% endblock %}
+{% block content %}
+    <div class="container">
+        <form class="form-horizontal" style="width: 500px;" method="POST">
+            {% csrf_token %}
+            <hr>
+            <table style="background: #ededff;" class="table table-bordered">
+                <colgroup>
+                    <col class="col1">
+                    <col class="col2">
+                </colgroup>
+                <tbody>
+                {{ form.as_table }}
+                </tbody>
+            </table>
+            <hr>
+            <button class="btn btn-success" type="submit">Save</button>
+            <a class="btn btn-danger" style="color: #ffffff" href="{% url 'Account:home' %}">Cancel</a>
+            <a class="btn btn-warning" style="color: #ffffff" href="{% url 'Account:create_user' %}">Reset</a>
+        </form>
+    </div>
+{% endblock %}

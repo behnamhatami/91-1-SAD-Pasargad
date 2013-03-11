@@ -1,0 +1,241 @@
+{% extends "html_base.html" %}
+{# title block for title #}
+{# style block for style the page #}
+{# navbar_title block for title of the navbar #}
+{# navbar_active_tab block for activated tab #}
+{# username var for username #}
+{# can_modify_user var for extra option #}
+{# sidbar_content block for side_bar content #}
+{# error_message var for error #}
+{# notify_message var for notify #}
+{# success_message var for success #}
+{# content block for body of the block #}
+
+{% block title %} Pasargad Insurance {% endblock %}
+{% block style %}
+    <style>
+        body {
+            padding-top: 60px;
+            padding-bottom: 30px;
+
+        }
+
+            /* Wrapper for page content to push down footer */
+        #wrap {
+            min-height: 100%;
+            height: auto !important;
+            height: 100%;
+            /* Negative indent footer by it's height */
+            margin: 0 auto -60px;
+        }
+
+        .errorlist {
+            color: red;
+        }
+
+            /* Set the fixed height of the footer here */
+        #push,
+        #footer {
+            height: 60px;
+        }
+
+        #footer {
+            background-color: #f5f5f5;
+        }
+            /* Carousel base class */
+        .carousel {
+            margin-bottom: 60px;
+        }
+
+        .carousel .container {
+            position: relative;
+            z-index: 9;
+        }
+
+        .carousel-control {
+            height: 80px;
+            margin-top: 0;
+            font-size: 120px;
+            text-shadow: 0 1px 1px rgba(0,0,0,.4);
+            background-color: transparent;
+            border: 0;
+            z-index: 10;
+        }
+
+        .carousel .item {
+            height: 500px;
+        }
+        .carousel img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            min-width: 100%;
+            height: 500px;
+        }
+
+        .carousel-caption {
+            background-color: transparent;
+            position: static;
+            max-width: 550px;
+            padding: 0 20px;
+            margin-top: 340px;
+        }
+        .carousel-caption h1,
+        .carousel-caption .lead {
+            margin: 0;
+            line-height: 1.25;
+            color: #fff;
+            text-shadow: 0 1px 1px rgba(0,0,0,.4);
+        }
+        .carousel-caption .btn {
+            margin-top: 10px;
+        }
+
+            /* Lastly, apply responsive CSS fixes as necessary */
+        @media (max-width: 767px) {
+            #footer {
+                margin-left: -20px;
+                margin-right: -20px;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            .carousel {
+                margin-left: -20px;
+                margin-right: -20px;
+            }
+            .carousel .container {
+
+            }
+            .carousel .item {
+                height: 300px;
+            }
+            .carousel img {
+                height: 300px;
+            }
+            .carousel-caption {
+                width: 65%;
+                padding: 0 70px;
+                margin-top: 100px;
+            }
+            .carousel-caption h1 {
+                font-size: 30px;
+            }
+            .carousel-caption .lead,
+            .carousel-caption .btn {
+                font-size: 18px;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <!--<span class="icon-bar"></span>-->
+                    <!--<span class="icon-bar"></span>-->
+                    <!--<span class="icon-bar"></span>-->
+                </a>
+                <a class="brand" href="">{% block navbar_title %} Content Title {% endblock %}</a>
+
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li class="{% block navbar_home %}{% endblock %}"><a href="{% url 'Home:home' %}">Home</a></li>
+                        {% if security.Expert or security.Secretory %}
+                        <li class="{% block navbar_insurance %}{% endblock %}"><a
+                                href="{% url 'Insurance:home' %}">Insurance</a></li>
+                        <li class="{% block navbar_accident %}{% endblock %}"><a
+                                href="{% url 'Accident:home' %}">Accident</a></li>
+                        {% endif %}
+                        {% if security.Admin %}
+                        <li class="{% block navbar_statistic %}{% endblock %}"><a
+                                href="{% url 'Statistic:home' %}">Statistic</a></li>
+                        {% endif %}
+                        <li class="dropdown {% block navbar_management %}{% endblock %}"><a href="#"
+                                                                                         class="dropdown-toggle"
+                                                                                         data-toggle="dropdown">Management<b
+                                class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url 'Account:home' %}">User Management</a></li>
+                                {% if security.Admin %}
+                                    <li><a href="{% url 'Management:home' %}">System Management</a></li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav pull-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-user"></i>
+                                {{ user_name }}
+                                <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url  'Account:view_profile' %}">View Profile</a></li>
+                                <li><a href="{% url  'Account:edit_profile' %}">Edit Profile</a></li>
+                                <li><a href="{% url  'Account:change_password' %}">Change Password</a></li>
+                                {% if security.Admin %}
+                                    <li class="divider"></li>
+                                    <li><a href="{% url  'Account:create_user' %}">Create User</a></li>
+                                    <li><a href="{% url  'Account:delete_user' %}">Delete User</a></li>
+                                    <li><a href="{% url  'Account:change_user_password' %}">Change User Password</a>
+                                    </li>
+                                {% endif %}
+                                <li class="divider"></li>
+                                <li><a href="{% url  'Account:logout' %}">Sign Out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+
+    <!--/row-->
+    <hr>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span3" style="width: 220px">
+                <div class="well sidebar-nav">
+                    <ul class="nav nav-list">
+                        <li class="nav-header">Sidebar</li>
+                        <hr>
+                        {% block  sidebar_content %} {% endblock %}
+                        <hr>
+                        <li><a href="{% block sidebar_back %}{% endblock %}">back</a></li>
+                    </ul>
+                </div>
+                <!--/.well -->
+            </div>
+            <!--/span-->
+            <div class="span9">
+                {% if error_message %}
+                    <div style="color:red; background-color: #eeeeee">
+                        {{ error_message }}
+                    </div>
+                    <hr>
+                {% endif %}
+                {% if notify_message %}
+                    <div style="color:#149bdf; background-color: #eeeeee">
+                        {{ notify_message }}
+                    </div>
+                    <hr>
+                {% endif %}
+                {% if success_message %}
+                    <div style="color:green; background-color: #eeeeee">
+                        {{ success_message }}
+                    </div>
+                    <hr>
+                {% endif %}
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+    <!--/row-->
+    <hr>
+    <footer class='footer'>
+        <p>&copy; Tobacco 2013</p>
+    </footer>
+{% endblock %}

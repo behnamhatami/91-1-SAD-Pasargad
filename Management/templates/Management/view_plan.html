@@ -1,0 +1,34 @@
+{% extends "Management/management_base.html" %}
+{% block navbar_title %} View Plan {% endblock %}
+{% block sidebar_plan %}active{% endblock %}
+{% block sidebar_back %}{% url 'Management:plan' %}{% endblock %}
+{% block content %}
+    <div class="container">
+        <form class="form-horizontal" style="width: 500px;" method="POST">
+            {% csrf_token %}
+            <hr>
+            <table style="background: #ededff" class="table table-bordered">
+                <colgroup>
+                    <col class="col1">
+                    <col class="col2">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <td><label>ID Number</label></td>
+                    <td><label>{{ property_list.id }}</label></td>
+                </tr>
+                {% for property in property_list %}
+                    <tr>
+                        <td><label>{{ property.0 }}</label></td>
+                        <td><label>{{ property.1|linebreaksbr }}</label></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <a class="btn btn-warning" type="submit"
+               href="{% url 'Management:edit_plan'  plan_id %}">Edit</a>
+            <a class="btn btn-danger" type="submit"
+               href="{% url 'Management:delete_plan'  plan_id %}">Delete</a>
+        </form>
+    </div>
+{% endblock %}

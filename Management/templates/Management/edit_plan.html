@@ -1,0 +1,27 @@
+{% extends "Management/management_base.html" %}
+{% block navbar_title %}Edit Plan{% endblock %}
+{% block sidebar_plan %}active{% endblock %}
+{% block sidebar_back %}{% url 'Management:view_plan' plan_id %}{% endblock %}
+
+{% block content %}
+    {% if form %}
+        <div class="container">
+            <form class="form-horizontal" style="width: 400px;" method="POST">
+                {% csrf_token %}
+                <hr>
+                <table style="background: #ededff" class="table table-bordered">
+                    <colgroup>
+                        <col class="col1">
+                        <col class="col2">
+                    </colgroup>
+                    <tbody>
+                    {{ form.as_table }}
+                    </tbody>
+                </table>
+                <button class="btn btn-success" type="submit">Save</button>
+                <a class="btn btn-danger" href="{% url 'Management:view_plan' plan_id %}">Cancel</a>
+                <a class="btn btn-warning" href="{% url 'Management:edit_plan' plan_id %}">Reset</a>
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}

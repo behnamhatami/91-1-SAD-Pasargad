@@ -1,0 +1,35 @@
+{% extends "Insurance/insurance_base.html" %}
+{% block navbar_title %} History Vehicle {% endblock %}
+{% block sidebar_vehicle %}active{% endblock %}
+{% block sidebar_back %}
+    {% url 'Insurance:view_vehicle' contract_info.contract.id contract_info.vehicle.id %}{% endblock %}
+
+{% block content %}
+    {% if not notify_message %}
+        <hr>
+        <table style="background: #ededff" class="table table-bordered">
+            <colgroup>
+                <col class="col1">
+                <col class="col2">
+            </colgroup>
+            <thead>
+            <tr>
+                {% for field in form_head %}
+                    <th><b>{{ field.label|capfirst }}</b></th>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+            {% for property_list in property_set %}
+                <tr>
+                    {% for property in property_list %}
+                        <td>
+                            <lable>{{ property.1|linebreaksbr }}</lable>
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

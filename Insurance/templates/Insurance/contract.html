@@ -1,0 +1,78 @@
+{% extends "Insurance/insurance_base.html" %}
+{% block navbar_title %} View Company {% endblock %}
+{% block sidebar_contract %}active{% endblock %}
+{% block sidebar_back %}{% url 'Insurance:contract' %}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <form class="form-horizontal" style="width: 500px;" method="POST">
+            {% csrf_token %}
+            <h3>{{ property_list.title }}</h3>
+            <table style="background: #ededff" class="table table-bordered">
+                <colgroup>
+                    <col class="col1">
+                    <col class="col2">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <td><label>ID Number</label></td>
+                    <td><label>{{ property_list.id }}</label></td>
+                </tr>
+                {% for property in property_list %}
+                    <tr>
+                        <td><label>{{ property.0 }}</label></td>
+                        <td><label>{{ property.1|linebreaksbr }}</label></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            {% if security.Secretory %}
+                <a class="btn btn-warning" type="submit"
+                   href="{% url 'Insurance:edit_contract' contract_info.contract.id %}">Edit</a>
+
+                <a class="btn btn-primary" type="submit"
+                   href="{% url 'Insurance:print_contract' contract_info.contract.id %}">Print</a>
+            {% endif %}
+            <a class="btn btn-info" type="submit"
+               href="{% url 'Insurance:history_contract' contract_info.contract.id %}">History</a>
+            <hr>
+            <h3>Other Links</h3>
+            <table style="background: #ededff" class="table table-bordered">
+                <colgroup>
+                    <col class="col1">
+                </colgroup>
+                <tbody>
+                {% if contract_info.vehicle %}
+                    <tr>
+                        <td><label><a
+                                href="{% url 'Insurance:view_vehicle' contract_info.contract.id contract_info.vehicle.id %}">Vehicle: {{ contract_info.vehicle }}</a></label>
+                        </td>
+                    </tr>
+                {% endif %}
+
+                {% if contract_info.person %}
+                    <tr>
+                        <td><label><a
+                                href="{% url 'Insurance:view_person' contract_info.contract.id contract_info.person.id %}">Vehicle
+                            Owner: {{ contract_info.person }}</a></label></td>
+                    </tr>
+                {% endif %}
+
+                {% if contract_info.company %}
+                    <tr>
+                        <td><label><a
+                                href="{% url 'Insurance:view_company' contract_info.contract.id contract_info.company.id %}">Vehicle
+                            Owner: {{ contract_info.company }}</a></label></td>
+                    </tr>
+                {% endif %}
+                <tr>
+                    <td>
+                        <label><a href="{% url 'Insurance:list_accident' contract_info.contract.id %}">Latest Accident</a></label>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+{% endblock %}

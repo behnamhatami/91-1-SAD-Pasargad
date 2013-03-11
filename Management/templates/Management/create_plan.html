@@ -1,0 +1,25 @@
+{% extends "Management/management_base.html" %}
+{% block navbar_title %} Create Plan {% endblock %}
+{% block sidebar_create_plan %}active{% endblock %}
+{% block sidebar_back %}{% url 'Management:home' %}{% endblock %}
+{% block content %}
+    <div class="container">
+        <form class="form-horizontal" style="width: 400px;" method="POST">
+            {% csrf_token %}
+            <hr>
+            <table style="background: #ededff" class="table table-bordered">
+                <colgroup>
+                    <col class="col1">
+                    <col class="col2">
+                </colgroup>
+                <tbody>
+                {{ form.as_table }}
+                </tbody>
+            </table>
+            <hr>
+            <button class="btn btn-success" type="submit">Save</button>
+            <a class="btn btn-danger" href="{% url 'Management:home' %}">Cancel</a>
+            <a class="btn btn-warning" href="{% url 'Management:create_plan' %}">Reset</a>
+        </form>
+    </div>
+{% endblock %}

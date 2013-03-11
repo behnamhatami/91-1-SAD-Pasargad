@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block sidebar_back %}{% url 'Statistic:home' %}{% endblock %}
+{% block navbar_statistic %}active{% endblock %}
+{% block sidebar_content %}
+    <li class="{% block sidebar_general %}{% endblock %}"><a href="{% url 'Statistic:general' %}">General Payments</a>
+    </li>
+    <li class="{% block sidebar_user %}{% endblock %}"><a href="{% url 'Statistic:user' %}">User Payments</a></li>
+    <li class="{% block sidebar_owner %}{% endblock %}"><a href="{% url 'Statistic:owner' %}">Owner Payments</a></li>
+    <li class="{% block sidebar_accident %}{% endblock %}"><a href="{% url 'Statistic:accident' %}">Count Accident</a></li>
+{% endblock %}

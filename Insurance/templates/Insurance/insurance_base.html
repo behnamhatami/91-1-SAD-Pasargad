@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block sidebar_back %}{% url 'Insurance:home' %}{% endblock %}
+{% block Insurance_tab %}active{% endblock %}
+{% block sidebar_content %}
+    <li class="{% block sidebar_contract %}{% endblock %}"><a
+            href="{% block sidebar_contract_link %}{% url 'Insurance:contract' %}{% endblock %}">Contract</a></li>
+    {% if security.Secretory %}
+        <li class="{% block sidebar_create_contract %}{% endblock %}"><a href="{% url 'Insurance:create_contract' %}">Create
+            Contract</a></li>
+    {% endif %}
+    {% if contract_info.vehicle %}
+        <li class="{% block sidebar_vehicle %}{% endblock %}"><a
+                href="{% url 'Insurance:view_vehicle' contract_info.contract.id contract_info.vehicle.id %}">Vehicle</a>
+        </li>
+    {% endif %}
+    {% if contract_info.company %}
+        <li class="{% block sidebar_company %}{% endblock %}"><a
+                href="{% url 'Insurance:view_company' contract_info.contract.id contract_info.company.id %}">Company</a>
+        </li>
+    {% endif %}
+    {% if contract_info.person %}
+        <li class="{% block sidebar_person %}{% endblock %}"><a
+                href="{% url 'Insurance:view_person' contract_info.contract.id contract_info.person.id %}">Person</a>
+        </li>
+    {% endif %}
+{% endblock %}

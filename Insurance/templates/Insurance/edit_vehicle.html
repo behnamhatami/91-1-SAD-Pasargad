@@ -1,0 +1,30 @@
+{% extends "Insurance/insurance_base.html" %}
+{% block navbar_title %} Edit Person {% endblock %}
+{% block sidebar_vehicle %}active{% endblock %}
+{% block sidebar_back %}
+    {% url 'Insurance:view_vehicle' contract_info.contract.id contract_info.vehicle.id %}{% endblock %}
+
+{% block content %}
+    {% if form %}
+        <div class="container">
+            <form class="form-horizontal" style="width: 400px;" method="POST">
+                {% csrf_token %}
+                <hr>
+                <table style="background: #ededff" class="table table-bordered">
+                    <colgroup>
+                        <col class="col1">
+                        <col class="col2">
+                    </colgroup>
+                    <tbody>
+                    {{ form.as_table }}
+                    </tbody>
+                </table>
+                <button class="btn btn-success" type="submit">Save</button>
+                <a class="btn btn-danger"
+                   href="{% url 'Insurance:view_vehicle' contract_info.contract.id contract_info.vehicle.id %}">Cancel</a>
+                <a class="btn btn-warning"
+                   href="{% url 'Insurance:edit_vehicle' contract_info.contract.id contract_info.vehicle.id %}">Reset</a>
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}

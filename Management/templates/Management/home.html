@@ -1,0 +1,26 @@
+{% extends "home_base.html" %}
+
+{% block navbar_title %} System Management {% endblock %}
+{% block sidebar_management %}active{% endblock %}
+{% block navbar_management %}active{% endblock %}
+{% block sidebar_back %}{% url 'Home:home' %}{% endblock %}
+{% block content %}
+    <div class="row-fluid">
+        <div class="span4">
+            <h2>Strategy</h2>
+
+            <p>Have a quick look on the strategies that are defined. You can easily see the details of each of them and
+            introduce new strategies to your insurance system.</p>
+            <p><a class="btn" href="{% url 'Management:strategy' %}">Go to the strategy sub-system &raquo;</a></p>
+        </div>
+        <!--/span-->
+        <div class="span4">
+            <h2>Plan</h2>
+
+            <p>Have a quick look on the plans that are defined. Add new plans using the introduced strategies and edit
+                 easily using the plan system.</p>
+            <p><a class="btn" href="{% url 'Management:plan' %}">Go to the plan sub-system &raquo;</a></p>
+        </div>
+        <!--/span-->
+    </div><!--/row-->
+{% endblock %}

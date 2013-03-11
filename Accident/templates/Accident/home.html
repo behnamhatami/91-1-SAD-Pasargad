@@ -1,0 +1,29 @@
+{% extends "home_base.html" %}
+
+{% block navbar_title %} Accident {% endblock %}
+{% block sidebar_back %}{% url 'Home:home' %}{% endblock %}
+{% block navbar_accident %}active{% endblock %}
+{% block sidebar_accident %}active{% endblock %}
+{% block content %}
+    <div class="row-fluid">
+        <!--/span-->
+        <div class="span4">
+            <h2>View Accident</h2>
+
+            <p> View the complete info about an specific accident using the accident id, printed on the form related to
+                the accident.</p>
+            <p><a class="btn" href="{% url 'Accident:accident' %}">View accident &raquo;</a></p>
+        </div>
+        <!--/span-->
+        {% if security.Secretory %}
+            <div class="span4">
+                <h2>Create Accident</h2>
+
+                <p>Oh an accident. You can add an accident so that it could be completed by an inspector so the user
+                would easily receive the precise amount of money it should be given.</p>
+                <p><a class="btn" href="{% url 'Accident:create_accident' %}">Create accident &raquo;</a></p>
+            </div>
+        {% endif %}
+        <!--/span-->
+    </div><!--/row-->
+{% endblock %}

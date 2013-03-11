@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block navbar_management %}active{% endblock %}
+{% block sidebar_back %}{% url 'Account:home' %}{% endblock %}
+{% block sidebar_content %}
+    <li class="{% block sidebar_view_profile %}{% endblock %}"><a href="{% url 'Account:view_profile' %}">View
+        Profile</a>
+    </li>
+    <li class="{% block sidebar_edit_profile %}{% endblock %}"><a href="{% url 'Account:edit_profile' %}">Edit
+        Profile</a>
+    </li>
+    <li class="{% block sidebar_change_password %}{% endblock %}"><a href="{% url 'Account:change_password' %}">Change
+        Password</a></li>
+    {% if security.Admin %}
+        <hr>
+        <li class="{% block sidebar_create_user %}{% endblock %}"><a href="{% url 'Account:create_user' %}">Create
+            User</a></li>
+        <li class="{% block sidebar_delete_user %}{% endblock %}"><a href="{% url 'Account:delete_user' %}">Delete
+            User</a></li>
+        <li class="{% block sidebar_change_user_password %}{% endblock %}"><a
+                href="{% url 'Account:change_user_password' %}">Change
+            User Password</a></li>
+    {% endif %}
+{% endblock %}

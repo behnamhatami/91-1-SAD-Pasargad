@@ -1,0 +1,56 @@
+{% extends "home_base.html" %}
+
+{% block navbar_title %} User Management {% endblock %}
+{% block sidebar_back %}{% url 'Home:home' %}{% endblock %}
+{% block navbar_management %}active{% endblock %}
+{% block sidebar_account %}active{% endblock %}
+{% block content %}
+    <div class="row-fluid">
+        <div class="span4">
+            <h2>View Profile</h2>
+
+            <p>View your profile using the button below.</p>
+            <p><a class="btn" href="{% url 'Account:view_profile' %}">View profile &raquo;</a></p>
+        </div>
+        <div class="span4">
+            <h2>Edit Profile</h2>
+
+            <p>Edit your profile information so your profile would be up-to-date all the time. </p>
+            <p><a class="btn" href="{% url 'Account:edit_profile' %}">Edit profile &raquo;</a></p>
+        </div>
+        <div class="span4">
+            <h2>Change Password</h2>
+
+            <p>Security! Change the password whenever you feel the security is low so that it would be immune to any
+            attacks.</p>
+            <p><a class="btn" href="{% url 'Account:change_password' %}">Change password &raquo;</a></p>
+        </div>
+        <!--/span-->
+    </div><!--/row-->
+
+    {% if security.Admin %}
+
+        <div class="row-fluid">
+            <div class="span4">
+                <h2>Create User</h2>
+
+                <p>Create a new user for your new employee with the right abilities so that they could start their working
+                    right now.</p>
+                <p><a class="btn" href="{% url 'Account:create_user' %}">Create user &raquo;</a></p>
+            </div>
+            <div class="span4">
+                <h2>Delete User</h2>
+
+                <p>Delete an existing user so that they won't be able to access the data in the system. </p>
+                <p><a class="btn" href="{% url 'Account:delete_user' %}">Delete user &raquo;</a></p>
+            </div>
+            <div class="span4">
+                <h2>Change Users Password</h2>
+
+                <p>Change the password for other users in case of forgetting or other problems with password. </p>
+                <p><a class="btn" href="{% url 'Account:change_user_password' %}">Change other users password &raquo;</a></p>
+            </div>
+            <!--/span-->
+        </div><!--/row-->
+    {% endif %}
+{% endblock %}

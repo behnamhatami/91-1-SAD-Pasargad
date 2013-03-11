@@ -1,0 +1,33 @@
+{% extends "Insurance/insurance_base.html" %}
+{% block navbar_title %} Create contract {% endblock %}
+{% block sidebar_create_contract %}active{% endblock %}
+{% block sidebar_back %}{% url 'Insurance:home' %}{% endblock %}
+
+
+{% block content %}
+    {% if form %}
+        <div class="container">
+            <form class="form-horizontal" style="width: 400px;" method="POST">
+                {% for item in hidden_table.items %}
+                    <input type="hidden" name={{ item.0 }} value={{ item.1 }}>
+                {% endfor %}
+                {% csrf_token %}
+                <hr>
+                <table style="background: #ededff" class="table table-bordered">
+                    <colgroup>
+                        <col class="col1">
+                        <col class="col2">
+                    </colgroup>
+                    <tbody>
+                    {{ form.as_table }}
+                    </tbody>
+                </table>
+                <button class="btn btn-info" type="submit">Forward</button>
+                <a class="btn btn-danger" href="{% url 'Insurance:home' %}">Cancel</a>
+            </form>
+        </div>
+    {% endif %}
+    {% if contract_info %}
+        <a class="btn btn-info" href="{% url 'Insurance:view_contract' contract_info.contract.id %}">View Contract</a>
+    {% endif %}
+{% endblock %}

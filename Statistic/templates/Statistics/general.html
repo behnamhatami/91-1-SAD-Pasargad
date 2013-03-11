@@ -1,0 +1,43 @@
+{% extends "Statistics/statistics_base.html" %}
+{% block navbar_title %} General Payments {% endblock %}
+{% block sidebar_general %}active{% endblock %}
+{% block sidebar_back %}
+    {% if chart %}
+        {% url 'Statistic:general' %}
+    {% else %}
+        {% url 'Statistic:home' %}
+    {% endif %}
+{% endblock %}
+{% block chart_block %}
+    {% if chart %}
+        <script type="text/javascript">
+            {% autoescape off %}
+                var _chartit_hco_array = {{ chart }};
+            {% endautoescape %}
+        </script>
+        <script src="/static/js/chartloader.js" type="text/javascript"></script>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if not chart %}
+        <div class="container">
+            <form class="form-horizontal" style="width: 400px;" method="POST">
+                {% csrf_token %}
+                <table style="background: #ededff" class="table table-bordered">
+                    <colgroup>
+                        <col class="col1">
+                        <col class="col2">
+                    </colgroup>
+                    <tbody>
+                    {{ form.as_table }}
+                    </tbody>
+                </table>
+                <button class="btn btn-success" type="submit">View Chart</button>
+            </form>
+        </div>
+    {% endif %}
+    {% if chart %}
+        <div id='chart'></div>
+    {% endif %}
+{% endblock %}

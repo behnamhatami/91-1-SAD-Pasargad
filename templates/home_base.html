@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block navbar_title %} Home {% endblock %}
+{% block sidebar_back %}{% url 'Home:home' %}{% endblock %}
+{% block sidebar_content %}
+    <li class="{% block sidebar_home %}{% endblock %}"><a href="{% url 'Home:home' %}">Home</a></li>
+    {% if security.Expert or security.Secretory %}
+        <li class="{% block sidebar_insurance %}{% endblock %}" ><a href="{% url 'Insurance:home' %}">Insurance</a></li>
+        <li class="{% block sidebar_accident %}{% endblock %}"><a href="{% url 'Accident:home' %}">Accident</a></li>
+    {% endif %}
+    {% if security.Admin %}
+        <li class="{% block sidebar_statistic %}{% endblock %}"><a href="{% url 'Statistic:home' %}">Statistic</a></li>
+    {% endif %}
+    <li class="{% block sidebar_account %}{% endblock %}"><a href="{% url 'Account:home'%}">User Management</a><li>
+    {% if security.Admin %}
+        <li class="{% block sidebar_management %}{% endblock %}"><a href="{% url 'Management:home' %}">System Management</a></li>
+    {% endif %}
+{% endblock %}

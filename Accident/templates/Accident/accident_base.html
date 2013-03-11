@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block sidebar_back %}{% url 'Accident:home' %}{% endblock %}
+{% block navbar_accident %}active{% endblock %}
+{% block sidebar_content %}
+    <li class="{% block sidebar_accident %}{% endblock %}"><a href="{% url 'Accident:accident' %}">Accident</a></li>
+    {% if security.Secretory %}
+        <li class="{% block sidebar_create_accident %}{% endblock %}"><a href="{% url 'Accident:create_accident' %}">Create
+            Accident</a></li>
+    {% endif %}
+{% endblock %}

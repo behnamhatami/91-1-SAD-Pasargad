@@ -1,0 +1,24 @@
+{% extends "Accident/accident_base.html" %}
+{% block navbar_title %} Create accident {% endblock %}
+{% block sidebar_create_accident %}active{% endblock %}
+{% block sidebar_back %}{% url 'Accident:home' %}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <form class="form-horizontal" style="width: 400px;" method="POST">
+            {% csrf_token %}
+            <table style="background: #ededff" class="table table-bordered">
+                <colgroup>
+                    <col class="col1">
+                    <col class="col2">
+                </colgroup>
+                <tbody>
+                {{ form.as_table }}
+                </tbody>
+            </table>
+            <button class="btn btn-success" type="submit">Save</button>
+            <a class="btn btn-danger" href="{% url 'Accident:home' %}">Cancel</a>
+            <a class="btn btn-warning" href="{% url 'Accident:create_accident' %}">Reset</a>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'Insurance/insurance_base.html' %}
+{% block navbar_title %}Search for Contract{% endblock %}
+{% block sidebar_contract %}active{% endblock %}
+{% block sidebar_back %}{% url 'Insurance:home' %}{% endblock %}
+{% block content %}
+    {% if not form %}
+        {% if not  notify_message %}
+            <div class="container">
+                <table style="background: #ededff" class="table table-bordered">
+                    <colgroup>
+                        <col class="col1">
+                        <col class="col2">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th><b>ID</b></th>
+                        {% for field in form_head %}
+                            <th><b>{{ field.label|capfirst }}</b></th>
+                        {% endfor %}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for property_list in property_set %}
+                        <tr>
+                            <td>
+                                <a href="{% url 'Insurance:view_contract' property_list.id %}">{{ property_list.id }}</a>
+                            </td>
+                            {% for property in property_list %}
+                                <td>
+                                    <lable>{{ property.1|linebreaksbr }}</lable>
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="container">
+            <form class="form-horizontal" style="width: 400px;" method="POST">
+                {% csrf_token %}
+                <hr>
+                <table style="background: #ededff" class="table table-bordered">
+                    <colgroup>
+                        <col class="col1">
+                        <col class="col2">
+                    </colgroup>
+                    <tbody>
+                    {{ form.as_table }}
+                    </tbody>
+                </table>
+                <button class="btn btn-success" type="submit">Search</button>
+                <a class="btn btn-danger"
+                   href="{% url 'Insurance:home' %}">Cancel</a>
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}

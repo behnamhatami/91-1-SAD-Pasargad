@@ -1,0 +1,70 @@
+{% extends "home_base.html" %}
+
+{% block navbar_title %} Pasargad Insurance {% endblock %}
+{% block sidebar_back %}{% url 'Home:home' %}{% endblock %}
+{% block sidebar_home %}active{% endblock %}
+{% block navbar_home %}active{% endblock %}
+
+{% block content %}
+    <div id="myCarousel" class="carousel slide">
+        <div class="carousel-inner">
+            <div class="item active">
+                <img src="{{ STATIC_URL }}img/black ferrari.jpg"  alt="">
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h1>Insurance.</h1>
+                        <p class="lead">Create or view a contract using the insurance system.</p>
+                        <a class="btn btn-large btn-primary" href="{% url 'Insurance:home' %}">View the insurance system</a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="{{ STATIC_URL }}img/accident.jpg" alt="">
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h1>Accident.</h1>
+                        <p class="lead">Create or view an accident.</p>
+                        <a class="btn btn-large btn-primary" href="{%  url 'Accident:home' %}">View the accident system</a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="{{ STATIC_URL }}img/statistic.jpg" alt="">
+                <div class="container">
+                    <div class="carousel-caption">
+
+                        <h1><font color="black">Statistics.</font></h1>
+                        <p class="lead"><font color="black">Check out the statistics to get a deeper grasp of your financial status.</font></p>
+                        <a class="btn btn-large btn-primary" href="{% url 'Statistic:home' %}">View the statistic system</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+    </div><!-- /.carousel -->
+    <div class="row-fluid">
+        <div class="span4">
+            <h2>Insurance</h2>
+
+            <p>You can easily create or access a contract using the insurance system. To start your work with a contract
+            click the button below.</p>
+            <p><a class="btn" href="{% url 'Insurance:home' %}">Insurance &raquo;</a></p>
+        </div>
+        <!--/span-->
+        <div class="span4">
+            <h2>Accident</h2>
+
+            <p>The accident system enables you to create an accident or view an existing accident for further completion or reviews.</p>
+            <p><a class="btn" href="{% url 'Accident:home' %}">Accident &raquo;</a></p>
+        </div>
+        <!--/span-->
+        <div class="span4">
+            <h2>Management</h2>
+
+            <p>Add new plans and strategies to the system for your own benefit.</p>
+            <p><a class="btn" href="{% url 'Management:home' %}">Management &raquo;</a></p>
+        </div>
+        <!--/span-->
+    </div><!--/row-->
+{% endblock %}
